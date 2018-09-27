@@ -1,9 +1,8 @@
 package ui;
 
 import Budget_stuff.FinancePlan;
-//import Budget_stuff.MathyMath;
+import Budget_stuff.MathyMath;
 import java.util.Scanner;
-
 
 
 public class FinancePlanner {
@@ -11,12 +10,14 @@ public class FinancePlanner {
 
     public FinancePlanner() {
         FinancePlan finance_plan = new FinancePlan();
+        MathyMath mathFinance = new MathyMath();
         finance_plan.beginBudget();
-        int action = -1;
+        mathFinance.fromZero();
+        int action;
 
         while (true) {
-            float amount = 0;
-            float spending = 0;
+            float spending;
+            float amount;
             finance_plan.enterStartPlan();
             action = scanner.nextInt();
 
@@ -25,27 +26,31 @@ public class FinancePlanner {
                 amount = scanner.nextFloat();
 
                 if (amount >= 1000) {
+                    mathFinance.AddBalance(amount);
                     finance_plan.compliment();
+
                 } else if (amount <= 0) {
                     finance_plan.rip();
                     break;
+                } else {
+                    mathFinance.AddBalance(amount);
                 }
             } else if (action == 2) {
                 System.out.println("Enter amount of spending");
                 spending = scanner.nextFloat();
 
-                if (spending > amount) {
+                if (spending >= mathFinance.retBalance()) {
                     finance_plan.rip();
                     break;
                 } else {
-                    amount -= spending;
-                    System.out.println("Balance is now: " + amount);
+                    mathFinance.SubSpending(spending);
+                    System.out.println("Balance is now: " + mathFinance.retBalance());
                 }
             } else if (action == 3) {
                 break;
             }
         }
-        System.out.println("FinancePlanner Shutdown");
+        finance_plan.shutdown();
         finance_plan.fin();
         return;
 

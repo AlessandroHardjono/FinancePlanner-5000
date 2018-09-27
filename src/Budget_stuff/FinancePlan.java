@@ -19,4 +19,6 @@ public class FinancePlan {
 
     public void fin() { System.out.println("bye bye"); }
 
+    public void shutdown() { System.out.println("FinancePlanner shutdown."); }
+
 }
