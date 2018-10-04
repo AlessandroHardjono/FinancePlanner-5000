@@ -1,43 +1,36 @@
 package Budget_stuff;
 
-public class MathyMath {
-    float balance = 0;
-    float amount = 0;
-    float spending = 0;
+
+public interface MathyMath {
+//    float balance;
+//    float amount;
+//    float spending;
+
 
     // EFFECTS: resets all the variables to 0.
-    public void fromZero() {
-        balance = 0;
-        amount = 0;
-        spending = 0;
-    }
+    void fromZero();
+//        balance = 0;
+//        amount = 0;
+//        spending = 0;
 
     //REQUIRES: the amount (input)
     //MODIFIES: balance through addition
     //EFFECTS: the balance is added by the amount input by the user.
-    public void AddBalance(float amount) {
-        balance += amount;
-    }
+    void addBalance(float amount);
 
     //REQUIRES: the spending form the budget.
     //MODIFIES: the balance through subtraction.
     //EFFECTS: the balance is subtracted by amount spent.
-    public void SubSpending(float spending) {
-        balance -= spending;
-    }
+    void subSpending(float spending);
+//        balance -= spending;
 
     //EFFECTS: returns balance.
-    public float retBalance(){
-        return balance;
-    }
+    float retBalance();
+//        return balance;
 
     //EFFECTS: returns balance.
-    public float retAmount(){
-        return amount;
-    }
+    float retAmount();
 
     //EFFECTS: returns balance.
-    public float retSpending(){
-        return spending;
-    }
+    float retSpending();
 }
