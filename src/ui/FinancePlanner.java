@@ -1,8 +1,6 @@
 package ui;
 
 import Budget_stuff.FinancePlan;
-//import Budget_stuff.MathyMath;
-
 
 import java.util.List;
 import java.util.Scanner;
@@ -80,41 +78,4 @@ public class FinancePlanner {
         new FinancePlanner();
     }
 
-//    @Override
-//    public void fromZero() {
-//        balance = 0;
-//        amount = 0;
-//        spending = 0;
-//    }
-//
-//    @Override
-//    public void addBalance(float amount) {
-//        balance += amount;
-//    }
-//
-//    @Override
-//    public void subSpending(float spending) {
-//        balance -= spending;
-//    }
-//
-//    @Override
-//    public float retBalance() {
-//        return balance;
-//    }
-//
-//    @Override
-//    public float retAmount() {
-//        return amount;
-//    }
-//
-//    @Override
-//    public float retSpending() {
-//        return spending;
-//    }
-
-
-//    public static ArrayList<String> splitOnSpace(String line){
-//        String[] splits = line.split(" ");
-//        return new ArrayList<>(Arrays.asList(splits));
-//    }
 }

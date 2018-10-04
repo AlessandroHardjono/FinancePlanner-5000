@@ -1,7 +1,6 @@
 package ui;
 
 import Budget_stuff.FinancePlan;
-//import Budget_stuff.MathyMath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
