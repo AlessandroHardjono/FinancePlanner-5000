@@ -1,5 +1,6 @@
 package ui;
 
+import Budget_stuff.BeginnerFinance;
 import Budget_stuff.FinancePlan;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,9 @@ class FinancePlannerTest {
     private FinancePlan mathFinance;
 
     @BeforeEach
-    public void runBefore() { mathFinance = new FinancePlan(); }
+    public void runBefore() {
+        mathFinance = new BeginnerFinance();
+    }
 
     @Test
     public void testAddBalance(){

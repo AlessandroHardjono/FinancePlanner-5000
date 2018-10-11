@@ -1,22 +1,19 @@
 package Budget_stuff;
 
-public class FinancePlan implements MathyMath {
+public abstract class FinancePlan implements MathyMath {
     float balance;
     float spending;
     float amount;
 
-    public void beginBudget(){
-        System.out.println("Welcome to the Finance Planner 5000");
-    }
+    public abstract void beginBudget(); //{ System.out.println("Welcome to the Finance Planner 5000");}
 
-    public void enterStartPlan(){
-        System.out.println("What do you want to plan?");
-        System.out.println("1. Add an amount to your balance");
-        System.out.println("2. Enter spending");
-        System.out.println("3. End the program");
-    }
+    public abstract void enterStartPlan();
 
-    public void compliment() { System.out.println("You're off to a good start!"); }
+    public abstract void compliment(); //{ System.out.println("You're off to a good start!"); }
+
+    public void financeChooseType() {
+        System.out.println("What type do you want? Beginner (0) or Expert (1)?");
+    }
 
     public void rip() { System.out.println("Sorry you're own your own."); }
 
