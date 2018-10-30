@@ -2,6 +2,7 @@ package ui;
 
 import Budget_stuff.BeginnerFinance;
 import Budget_stuff.FinancePlan;
+import exceptions.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,14 +17,14 @@ class FinancePlannerTest {
     }
 
     @Test
-    public void testAddBalance(){
+    public void testAddBalance() throws NegativeNumberException {
         mathFinance.fromZero();
         mathFinance.addBalance(500);
         assertEquals(500, mathFinance.retBalance());
     }
 
     @Test
-    public void testSubSpending(){
+    public void testSubSpending() throws NegativeNumberException {
         mathFinance.fromZero();
         mathFinance.addBalance(500);
         mathFinance.subSpending(300);
@@ -31,7 +32,7 @@ class FinancePlannerTest {
     }
 
     @Test
-    public void testFromZero(){
+    public void testFromZero() throws NegativeNumberException {
         mathFinance.addBalance(500);
         mathFinance.subSpending(300);
         mathFinance.fromZero();
@@ -40,6 +41,14 @@ class FinancePlannerTest {
         assertEquals(0, mathFinance.retSpending());
     }
 
-    //@Test
-    //public void
+    @Test
+    public void testMisMatchException() {
+        try {
+            mathFinance.addBalance(-500);
+            fail("still negative");
+        } catch (NegativeNumberException e) {
+            System.out.println("pass");
+        }
+    }
+
 }

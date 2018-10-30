@@ -1,15 +1,17 @@
 package Budget_stuff;
 
+import exceptions.NegativeNumberException;
+
 public abstract class FinancePlan implements MathyMath {
     float balance;
     float spending;
     float amount;
 
-    public abstract void beginBudget(); //{ System.out.println("Welcome to the Finance Planner 5000");}
+    public abstract void beginBudget();
 
     public abstract void enterStartPlan();
 
-    public abstract void compliment(); //{ System.out.println("You're off to a good start!"); }
+    public abstract void compliment();
 
     public void financeChooseType() {
         System.out.println("What type do you want? Beginner (0) or Expert (1)?");
@@ -21,6 +23,7 @@ public abstract class FinancePlan implements MathyMath {
 
     public void shutdown() { System.out.println("FinancePlanner shutdown."); }
 
+
     @Override
     public void fromZero() {
         balance = 0;
@@ -29,8 +32,11 @@ public abstract class FinancePlan implements MathyMath {
     }
 
     @Override
-    public void addBalance(float amount) {
+    public void addBalance(float amount) throws NegativeNumberException{
         balance += amount;
+        if (amount < 0) {
+            throw new NegativeNumberException("That's a negative number");
+        }
     }
 
     @Override

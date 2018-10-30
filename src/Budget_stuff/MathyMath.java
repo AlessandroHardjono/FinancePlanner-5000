@@ -1,5 +1,6 @@
 package Budget_stuff;
 
+import exceptions.NegativeNumberException;
 
 public interface MathyMath {
 
@@ -10,7 +11,7 @@ public interface MathyMath {
     //REQUIRES: the amount (input)
     //MODIFIES: balance through addition
     //EFFECTS: the balance is added by the amount input by the user.
-    void addBalance(float amount);
+    void addBalance(float amount) throws NegativeNumberException;
 
     //REQUIRES: the spending form the budget.
     //MODIFIES: the balance through subtraction.
