@@ -1,5 +1,6 @@
 package ui;
 
+import Budget_stuff.AccountControl;
 import Budget_stuff.BeginnerFinance;
 import Budget_stuff.FinancePlan;
 import exceptions.NegativeNumberException;
@@ -10,10 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FinancePlannerTest {
     private FinancePlan mathFinance;
+    private AccountControl userNow;
 
     @BeforeEach
     public void runBefore() {
         mathFinance = new BeginnerFinance();
+        userNow = new AccountControl("Alex", 0);
     }
 
     @Test
@@ -49,6 +52,14 @@ class FinancePlannerTest {
         } catch (NegativeNumberException e) {
             System.out.println("pass");
         }
+    }
+
+    @Test void testEqualsAndHashcode() {
+        System.out.println(new AccountControl("Alex", 0)
+                .equals(new AccountControl("Alex", 0)));
+        System.out.println(new AccountControl("Alex", 0).
+                equals(new AccountControl("Jack", 1)));
+
     }
 
 }
