@@ -8,10 +8,10 @@ import exceptions.NegativeNumberException;
 
 import java.util.Scanner;
 import java.io.IOException;
-//import java.util.List;
-//import java.io.PrintWriter;
-//import java.nio.file.Files;
-//import java.nio.file.Paths;
+import java.util.List;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 public class FinancePlanner {
@@ -24,26 +24,11 @@ public class FinancePlanner {
         int financeType;
         String name;
 
-//        List<String> lines = Files.readAllLines(Paths.get("outputFile.txt"));
-//        PrintWriter writer = new PrintWriter("outputFile.txt", "UTF-8");
+        List<String> lines = Files.readAllLines(Paths.get("outputFile.txt"));
+        PrintWriter writer = new PrintWriter("outputFile.txt", "UTF-8");
 
 
-
-//        while (true) {
-//            try {
-//                name = scanner.nextLine();
-//                currentUser.establishUser(name);
-//                break;
-//            } catch (java.util.InputMismatchException e) {
-//                System.out.println("Please try again.");
-//                scanner.nextLine();
-//            }
-//        }
-
-//        Float balance = Float.parseFloat(lines.get(0));
-//        beginnerFinance_plan.addBalance(balance);
-//        expertFinance_plan.addBalance(balance);
-//        beginnerFinance_plan.financeChooseType();
+        Float balance = Float.parseFloat(lines.get(0));
 
         while (true) {
             //AccountControl currentUser = new AccountControl();
@@ -53,16 +38,6 @@ public class FinancePlanner {
             currentUser.establishUser(name);
             currentUser.addUser(name);
 
-//            while (true) {
-//                try {
-//                    name = scanner.nextLine();
-//                    currentUser.establishUser(name);
-//                    break;
-//                } catch (java.util.InputMismatchException e) {
-//                    System.out.println("Please try again.");
-//                    scanner.nextLine();
-//                }
-//            }
 
             while (true) {
                 try {
@@ -79,24 +54,34 @@ public class FinancePlanner {
                 currentUser.retID().put(currentUser, "Beginner");
                 currentUser.addType(financeType);
                 FinancePlan beginnerFinance_plan = new BeginnerFinance();
+                beginnerFinance_plan.addBalance(balance);
                 financeAction(beginnerFinance_plan);
+                writer.println(Float.toString(beginnerFinance_plan.retBalance()));
+                writer.close();
             } else if (financeType == 1) {
                 currentUser.retID().put(currentUser, "Expert");
                 currentUser.addType(financeType);
                 FinancePlan expertFinance_plan = new ExpertFinance();
+                expertFinance_plan.addBalance(balance);
                 financeAction(expertFinance_plan);
+                writer.println(Float.toString(expertFinance_plan.retBalance()));
+                writer.close();
             }
 
             System.out.println("Accounts so far:");
             System.out.println(currentUser.displayID());
 
-            System.out.println("try again? (0)Yes (1)No");
+            System.out.println("try again? (0)Yes (1)No (2) Remove name");
             int tryAgain = scanner.nextInt();
             if (tryAgain == 1) { break; }
             else if (tryAgain == 0) {
                 currentUser.stateName();
                 name = scanner.nextLine();
                 currentUser.establishUser(name);
+                currentUser.addUser(name);
+            }
+            else if (tryAgain == 2) {
+                currentUser.retID().remove(currentUser);
             }
 
         }
@@ -107,8 +92,7 @@ public class FinancePlanner {
 
         System.out.println("goodbye!");
 
-//        writer.println(Float.toString(beginnerFinance_plan.retBalance()));
-//        writer.close();
+
 
         return;
 

@@ -1,13 +1,13 @@
 package Budget_stuff;
 
-import exceptions.NegativeNumberException;
-import ui.FinancePlanner;
+//import exceptions.NegativeNumberException;
+//import ui.FinancePlanner;
 
-import java.io.IOException;
+//import java.io.IOException;
 import java.util.*;
 //import java.util.Set;
 
-public class AccountControl{
+public class AccountControl {
     private String name;
     private ArrayList<String> names;
     private int type;
