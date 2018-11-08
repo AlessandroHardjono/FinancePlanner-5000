@@ -51,21 +51,9 @@ public class FinancePlanner {
             }
 
             if (financeType == 0) {
-                currentUser.retID().put(currentUser, "Beginner");
-                currentUser.addType(financeType);
-                FinancePlan beginnerFinance_plan = new BeginnerFinance();
-                beginnerFinance_plan.addBalance(balance);
-                financeAction(beginnerFinance_plan);
-                writer.println(Float.toString(beginnerFinance_plan.retBalance()));
-                writer.close();
+                beginnerFinanceAction(currentUser, financeType, writer, balance);
             } else if (financeType == 1) {
-                currentUser.retID().put(currentUser, "Expert");
-                currentUser.addType(financeType);
-                FinancePlan expertFinance_plan = new ExpertFinance();
-                expertFinance_plan.addBalance(balance);
-                financeAction(expertFinance_plan);
-                writer.println(Float.toString(expertFinance_plan.retBalance()));
-                writer.close();
+                expertFinanceAction(currentUser, financeType, writer, balance);
             }
 
             System.out.println("Accounts so far:");
@@ -86,19 +74,35 @@ public class FinancePlanner {
 
         }
 
-
 //        beginnerFinance_plan.shutdown();
 //        beginnerFinance_plan.fin();
 
         System.out.println("goodbye!");
-
-
 
         return;
 
 
     }
 
+    private void expertFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance) throws NegativeNumberException {
+        currentUser.retID().put(currentUser, "Expert");
+        currentUser.addType(financeType);
+        FinancePlan expertFinance_plan = new ExpertFinance();
+        expertFinance_plan.addBalance(balance);
+        financeAction(expertFinance_plan);
+        writer.println(Float.toString(expertFinance_plan.retBalance()));
+        writer.close();
+    }
+
+    private void beginnerFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance) throws NegativeNumberException {
+        currentUser.retID().put(currentUser, "Beginner");
+        currentUser.addType(financeType);
+        FinancePlan beginnerFinance_plan = new BeginnerFinance();
+        beginnerFinance_plan.addBalance(balance);
+        financeAction(beginnerFinance_plan);
+        writer.println(Float.toString(beginnerFinance_plan.retBalance()));
+        writer.close();
+    }
 
 
     private void financeAction(FinancePlan f) throws NegativeNumberException{
@@ -106,8 +110,6 @@ public class FinancePlanner {
         f.beginBudget();
         f.fromZero();
         while (true) {
-            float spending;
-            float amount;
             f.enterStartPlan();
             while (true) {
                 try {
@@ -122,49 +124,57 @@ public class FinancePlanner {
             }
 
             if (action == 1) {
-                System.out.println("Enter amount of money to your balance");
-                while (true) {
-                    try {
-                        amount = scanner.nextFloat();
-                        break;
-                    } catch (java.util.InputMismatchException e) {
-                        System.out.println("Please try again.");
-                        scanner.nextLine();
-                    }
-                }
-                if (amount >= 100) {
-                    f.addBalance(amount);
-                    f.compliment();
-                } else if (amount < 0) {
-                    f.rip();
-                } else {
-                    f.addBalance(amount);
-                }
-
+                addBalanceToPlan(f);
             } else if (action == 2) {
-                System.out.println("Enter amount of spending");
-                while (true) {
-                    try {
-                        spending = scanner.nextFloat();
-                        break;
-                    } catch (java.util.InputMismatchException e) {
-                        System.out.println("Please try again.");
-                        scanner.nextLine();
-                    }
-                }
-
-                if (spending > f.retBalance()) {
-                    throw new NegativeNumberException("Game Over.");
-                } else {
-                    f.subSpending(spending);
-                    System.out.println("Balance is now: " + f.retBalance());
-                }
+                spendBalanceFromPlan(f);
             } else if (action == 3) {
                 break;
             }
         }
     }
 
+    private void spendBalanceFromPlan(FinancePlan f) throws NegativeNumberException {
+        float spending;
+        System.out.println("Enter amount of spending");
+        while (true) {
+            try {
+                spending = scanner.nextFloat();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Please try again.");
+                scanner.nextLine();
+            }
+        }
+
+        if (spending > f.retBalance()) {
+            throw new NegativeNumberException("Game Over.");
+        } else {
+            f.subSpending(spending);
+            System.out.println("Balance is now: " + f.retBalance());
+        }
+    }
+
+    private void addBalanceToPlan(FinancePlan f) throws NegativeNumberException {
+        float amount;
+        System.out.println("Enter amount of money to your balance");
+        while (true) {
+            try {
+                amount = scanner.nextFloat();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Please try again.");
+                scanner.nextLine();
+            }
+        }
+        if (amount >= 100) {
+            f.addBalance(amount);
+            f.compliment();
+        } else if (amount < 0) {
+            f.rip();
+        } else {
+            f.addBalance(amount);
+        }
+    }
 
 
     public static void main(String[] args) throws IOException, NegativeNumberException {
