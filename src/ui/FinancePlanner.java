@@ -170,9 +170,10 @@ public class FinancePlanner {
             f.addBalance(amount);
             f.compliment();
         } else if (amount < 0) {
-            f.rip();
+            throw new NegativeNumberException("Game Over.");
         } else {
             f.addBalance(amount);
+            System.out.println("Balance is now: " + f.retBalance());
         }
     }
 
