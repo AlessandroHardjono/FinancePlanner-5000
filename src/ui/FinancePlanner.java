@@ -13,6 +13,11 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 public class FinancePlanner {
     Scanner scanner = new Scanner(System.in);
@@ -84,9 +89,10 @@ public class FinancePlanner {
 
     }
 
-    private void expertFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance) throws NegativeNumberException {
+    private void expertFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance) throws NegativeNumberException, IOException {
         currentUser.retID().put(currentUser, "Expert");
         currentUser.addType(financeType);
+
         FinancePlan expertFinance_plan = new ExpertFinance();
         expertFinance_plan.addBalance(balance);
         financeAction(expertFinance_plan);
@@ -94,10 +100,13 @@ public class FinancePlanner {
         writer.close();
     }
 
-    private void beginnerFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance) throws NegativeNumberException {
+    private void beginnerFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance) throws NegativeNumberException, IOException {
         currentUser.retID().put(currentUser, "Beginner");
         currentUser.addType(financeType);
+
         FinancePlan beginnerFinance_plan = new BeginnerFinance();
+        currentUser.addObserver(beginnerFinance_plan);
+
         beginnerFinance_plan.addBalance(balance);
         financeAction(beginnerFinance_plan);
         writer.println(Float.toString(beginnerFinance_plan.retBalance()));
@@ -105,7 +114,7 @@ public class FinancePlanner {
     }
 
 
-    private void financeAction(FinancePlan f) throws NegativeNumberException{
+    private void financeAction(FinancePlan f) throws NegativeNumberException, IOException {
         int action;
         f.beginBudget();
         f.fromZero();
@@ -129,8 +138,12 @@ public class FinancePlanner {
                 spendBalanceFromPlan(f);
             } else if (action == 3) {
                 break;
+            } else if (action == 4) {
+                displayWeb();
             }
         }
+
+
     }
 
     private void spendBalanceFromPlan(FinancePlan f) throws NegativeNumberException {
@@ -177,6 +190,33 @@ public class FinancePlanner {
         }
     }
 
+    private void displayWeb() throws IOException {
+
+        BufferedReader br = null;
+
+        try {
+            String theURL = "https://www.ugrad.cs.ubc.ca/~cs210/2018w1/welcomemsg.html"; //this can point to any URL
+            URL url = new URL(theURL);
+            br = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            String line;
+
+            StringBuilder sb = new StringBuilder();
+
+            while ((line = br.readLine()) != null) {
+
+                sb.append(line);
+                sb.append(System.lineSeparator());
+            }
+
+            System.out.println(sb);
+        } finally {
+
+            if (br != null) {
+                br.close();
+            }
+        }
+    }
 
     public static void main(String[] args) throws IOException, NegativeNumberException {
         new FinancePlanner();

@@ -1,11 +1,18 @@
 package Budget_stuff;
 
 import exceptions.NegativeNumberException;
+import observer.FinanceObserver;
 
-public abstract class FinancePlan implements MathyMath {
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class FinancePlan implements MathyMath, FinanceObserver {
     float balance;
     float spending;
     float amount;
+    String name;
+    List<AccountControl> names = new ArrayList<>();
+
 
     public abstract void beginBudget();
 
@@ -22,6 +29,19 @@ public abstract class FinancePlan implements MathyMath {
     public void fin() { System.out.println("bye bye"); }
 
     public void shutdown() { System.out.println("FinancePlanner shutdown."); }
+
+    public void addName(AccountControl ac) {
+        if(!names.contains(ac)) {
+            names.add(ac);
+            //ac.notifyObserver(ac);
+        }
+    }
+
+    @Override
+    public void update(AccountControl accountControl) {
+        System.out.println("User at the moment: " + accountControl.displayID());
+    }
+
 
 
     @Override

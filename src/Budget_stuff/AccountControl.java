@@ -1,13 +1,16 @@
 package Budget_stuff;
 
 //import exceptions.NegativeNumberException;
-//import ui.FinancePlanner;
+import ui.FinancePlanner;
 
 //import java.io.IOException;
+import observer.FinanceObserver;
+import observer.Subject;
+
 import java.util.*;
 //import java.util.Set;
 
-public class AccountControl {
+public class AccountControl extends Subject {
     private String name;
     private ArrayList<String> names;
     private int type;
@@ -30,6 +33,7 @@ public class AccountControl {
 
     public void addUser(String name) {
         this.names.add(name);
+        notifyObserver(this);
     }
 
 //    public void establishType(int type) {
