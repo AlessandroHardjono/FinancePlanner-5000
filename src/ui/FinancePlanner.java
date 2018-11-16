@@ -18,6 +18,10 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class FinancePlanner {
     Scanner scanner = new Scanner(System.in);
@@ -105,7 +109,7 @@ public class FinancePlanner {
         currentUser.addType(financeType);
 
         FinancePlan beginnerFinance_plan = new BeginnerFinance();
-        currentUser.addObserver(beginnerFinance_plan);
+        currentUser. addObserver(beginnerFinance_plan);
 
         beginnerFinance_plan.addBalance(balance);
         financeAction(beginnerFinance_plan);
@@ -190,13 +194,16 @@ public class FinancePlanner {
         }
     }
 
-    private void displayWeb() throws IOException {
+    private void displayWeb() throws IOException, MalformedURLException {
 
         BufferedReader br = null;
 
         try {
-            String theURL = "https://www.ugrad.cs.ubc.ca/~cs210/2018w1/welcomemsg.html"; //this can point to any URL
-            URL url = new URL(theURL);
+            String apiKey = "6aed9371bcf68da6cee41dfebf8de257";
+            String weatherQuerySydney = "http://data.fixer.io/api/latest?access_key=";
+            String actualURL = weatherQuerySydney+apiKey;
+
+            URL url = new URL(actualURL);
             br = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String line;
@@ -208,8 +215,11 @@ public class FinancePlanner {
                 sb.append(line);
                 sb.append(System.lineSeparator());
             }
+            System.out.println(sb.toString());
+            JSONObject timestamp = new JSONObject(sb.toString());
+            int tS = timestamp.getInt("timestamp");
+            System.out.println("Timestampe is: " + tS);
 
-            System.out.println(sb);
         } finally {
 
             if (br != null) {
