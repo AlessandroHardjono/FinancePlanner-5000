@@ -18,8 +18,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -82,9 +80,6 @@ public class FinancePlanner {
             }
 
         }
-
-//        beginnerFinance_plan.shutdown();
-//        beginnerFinance_plan.fin();
 
         System.out.println("goodbye!");
 

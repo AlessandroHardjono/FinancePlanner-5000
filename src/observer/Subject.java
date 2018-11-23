@@ -1,7 +1,6 @@
 package observer;
 
 import Budget_stuff.AccountControl;
-//import Budget_stuff.BeginnerFinance;
 
 import java.util.ArrayList;
 import java.util.List;

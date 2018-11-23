@@ -1,14 +1,13 @@
 package Budget_stuff;
 
 //import exceptions.NegativeNumberException;
-import ui.FinancePlanner;
+//import ui.FinancePlanner;
 
 //import java.io.IOException;
-import observer.FinanceObserver;
+//import observer.FinanceObserver;
 import observer.Subject;
 
 import java.util.*;
-//import java.util.Set;
 
 public class AccountControl extends Subject {
     private String name;
