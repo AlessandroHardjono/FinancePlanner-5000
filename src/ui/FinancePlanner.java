@@ -19,19 +19,28 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.*;
+import java.awt.FlowLayout;
+import java.awt.event.*;
 
 import org.json.JSONObject;
 
 
-public class FinancePlanner {
+public class FinancePlanner extends JFrame {
     Scanner scanner = new Scanner(System.in);
-
+    private JTextField nameField;
+    private JTextField boeField;
+    private JTextField addField;
+    private JTextField spendField;
 
     public FinancePlanner() throws IOException, NegativeNumberException {
+        super("The Finance Planner 5000");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(350,350);
+        setVisible(true);
+        setLayout(new FlowLayout());
         AccountControl currentUser = new AccountControl("", 0);
 
         int financeType;
-//        String name;
 
         List<String> lines = Files.readAllLines(Paths.get("outputFile.txt"));
         PrintWriter writer = new PrintWriter("outputFile.txt", "UTF-8");
@@ -43,6 +52,8 @@ public class FinancePlanner {
             //AccountControl currentUser = new AccountControl();
 
             currentUser.stateName();
+            nameField = new JTextField(10);
+            add(nameField);
             String name = JOptionPane.showInputDialog("State your name: ");
 //                    scanner.nextLine();
             currentUser.establishUser(name);
@@ -70,8 +81,10 @@ public class FinancePlanner {
                 expertFinanceAction(currentUser, financeType, writer, balance);
             }
 
-            System.out.println("Accounts so far:");
-            System.out.println(currentUser.displayID());
+            JLabel accounts = new JLabel("Accounts so far: "+ currentUser.displayID());
+            accounts.setToolTipText("This is the amount of accounts active right now.");
+//            System.out.println("Accounts so far:");
+//            System.out.println(currentUser.displayID());
 
             System.out.println("try again? (0)Yes (1)No (2) Remove name");
             int tryAgain = scanner.nextInt();
@@ -231,7 +244,7 @@ public class FinancePlanner {
     }
 
     public static void main(String[] args) throws IOException, NegativeNumberException {
-        new FinancePlanner();
+        FinancePlanner fplay = new FinancePlanner();
     }
 
 }
