@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.*;
+
 import org.json.JSONObject;
 
 
@@ -29,7 +31,7 @@ public class FinancePlanner {
         AccountControl currentUser = new AccountControl("", 0);
 
         int financeType;
-        String name;
+//        String name;
 
         List<String> lines = Files.readAllLines(Paths.get("outputFile.txt"));
         PrintWriter writer = new PrintWriter("outputFile.txt", "UTF-8");
@@ -41,19 +43,24 @@ public class FinancePlanner {
             //AccountControl currentUser = new AccountControl();
 
             currentUser.stateName();
-            name = scanner.nextLine();
+            String name = JOptionPane.showInputDialog("State your name: ");
+//                    scanner.nextLine();
             currentUser.establishUser(name);
             currentUser.addUser(name);
 
 
             while (true) {
                 try {
-                    System.out.println("Choose a type (0)Beginner (1)Expert");
-                    financeType = scanner.nextInt();
+//                    System.out.println("Choose a type (0)Beginner (1)Expert");
+                    String choiceF = JOptionPane.showInputDialog("Choose a type (0)Beginner (1) Expert");
+                    financeType = Integer.parseInt(choiceF);
+//                            scanner.nextInt();
                     break;
                 } catch (java.util.InputMismatchException e) {
                     System.out.println("Please try again.");
-                    scanner.nextLine();
+                    String choiceF = JOptionPane.showInputDialog("Choose a type (0)Beginner (1) Expert");
+//                    financeType = Integer.parseInt(choiceF);
+//                    scanner.nextLine();
                 }
             }
 
