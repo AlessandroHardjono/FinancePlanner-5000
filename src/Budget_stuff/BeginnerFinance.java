@@ -8,12 +8,20 @@ public class BeginnerFinance extends FinancePlan {
     }
 
     @Override
-    public void enterStartPlan() {
-        System.out.println("What does the beginner want to plan?");
-        System.out.println("1. Add an amount to your balance");
-        System.out.println("2. Enter spending");
-        System.out.println("3. End the program");
-        System.out.println("4. Display Welcome Page");
+    public String enterStartPlan() {
+//        System.out.println("What does the beginner want to plan?");
+//        System.out.println("1. Add an amount to your balance");
+//        System.out.println("2. Enter spending");
+//        System.out.println("3. End the program");
+//        System.out.println("4. Display Welcome Page");
+
+        String output = "What does the beginner want to plan?\n" +
+                "1. Add an amount to your balance\n" +
+                "2. Enter Spending\n" +
+                "3. End the program\n" +
+                "4. Display Timestamp from a Finance Source.";
+
+        return output;
     }
 
     @Override

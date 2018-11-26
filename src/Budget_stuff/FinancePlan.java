@@ -16,7 +16,7 @@ public abstract class FinancePlan implements MathyMath, FinanceObserver {
 
     public abstract void beginBudget();
 
-    public abstract void enterStartPlan();
+    public abstract String enterStartPlan();
 
     public abstract void compliment();
 

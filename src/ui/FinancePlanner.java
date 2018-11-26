@@ -34,12 +34,11 @@ public class FinancePlanner extends JFrame {
 
     public FinancePlanner() throws IOException, NegativeNumberException {
         super("The Finance Planner 5000");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(350,350);
         setVisible(true);
         setLayout(new FlowLayout());
-        AccountControl currentUser = new AccountControl("", 0);
 
+        AccountControl currentUser = new AccountControl("", 0);
         int financeType;
 
         List<String> lines = Files.readAllLines(Paths.get("outputFile.txt"));
@@ -49,16 +48,17 @@ public class FinancePlanner extends JFrame {
         Float balance = Float.parseFloat(lines.get(0));
 
         while (true) {
-            //AccountControl currentUser = new AccountControl();
 
             currentUser.stateName();
             nameField = new JTextField(10);
             add(nameField);
             String name = JOptionPane.showInputDialog("State your name: ");
-//                    scanner.nextLine();
             currentUser.establishUser(name);
             currentUser.addUser(name);
 
+//            JButton buttonBeginner = new JButton ("Beginner");
+//            JButton buttonExpert = new JButton("Expert");
+//            JPanel panel = new JPanel();
 
             while (true) {
                 try {
@@ -70,7 +70,7 @@ public class FinancePlanner extends JFrame {
                 } catch (java.util.InputMismatchException e) {
                     System.out.println("Please try again.");
                     String choiceF = JOptionPane.showInputDialog("Choose a type (0)Beginner (1) Expert");
-//                    financeType = Integer.parseInt(choiceF);
+                    financeType = Integer.parseInt(choiceF);
 //                    scanner.nextLine();
                 }
             }
@@ -83,15 +83,20 @@ public class FinancePlanner extends JFrame {
 
             JLabel accounts = new JLabel("Accounts so far: "+ currentUser.displayID());
             accounts.setToolTipText("This is the amount of accounts active right now.");
+            add(accounts);
 //            System.out.println("Accounts so far:");
 //            System.out.println(currentUser.displayID());
 
-            System.out.println("try again? (0)Yes (1)No (2) Remove name");
-            int tryAgain = scanner.nextInt();
+//            System.out.println("try again? (0)Yes (1)No (2) Remove name");
+            String tryInput = JOptionPane.showInputDialog("try again? (0)Yes (1)No (2) Remove name");
+            int tryAgain = Integer.parseInt(tryInput);
+
             if (tryAgain == 1) { break; }
             else if (tryAgain == 0) {
-                currentUser.stateName();
-                name = scanner.nextLine();
+                name = JOptionPane.showInputDialog("State your name: ");
+                currentUser.establishUser(name);
+//                currentUser.stateName();
+//                name = scanner.nextLine();
                 currentUser.establishUser(name);
                 currentUser.addUser(name);
             }
@@ -101,14 +106,17 @@ public class FinancePlanner extends JFrame {
 
         }
 
-        System.out.println("goodbye!");
+        JLabel byeBye = new JLabel("goodbye!");
+        add(byeBye);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         return;
 
 
     }
 
-    private void expertFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance) throws NegativeNumberException, IOException {
+    private void expertFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance)
+            throws NegativeNumberException, IOException {
         currentUser.retID().put(currentUser, "Expert");
         currentUser.addType(financeType);
 
@@ -119,12 +127,13 @@ public class FinancePlanner extends JFrame {
         writer.close();
     }
 
-    private void beginnerFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance) throws NegativeNumberException, IOException {
+    private void beginnerFinanceAction(AccountControl currentUser, int financeType, PrintWriter writer, Float balance)
+            throws NegativeNumberException, IOException {
         currentUser.retID().put(currentUser, "Beginner");
         currentUser.addType(financeType);
 
         FinancePlan beginnerFinance_plan = new BeginnerFinance();
-        currentUser. addObserver(beginnerFinance_plan);
+        currentUser.addObserver(beginnerFinance_plan);
 
         beginnerFinance_plan.addBalance(balance);
         financeAction(beginnerFinance_plan);
@@ -138,16 +147,17 @@ public class FinancePlanner extends JFrame {
         f.beginBudget();
         f.fromZero();
         while (true) {
-            f.enterStartPlan();
+
             while (true) {
                 try {
-                    action = scanner.nextInt();
+                    String starter = JOptionPane.showInputDialog(f.enterStartPlan());
+                    action = Integer.parseInt(starter);
                     break;
                 } catch (java.util.InputMismatchException e) {
-                    System.out.println("Please try again.");
-                    scanner.nextLine();
-                } finally {
-                    System.out.println("Input a number.");
+                    String starter = JOptionPane.showInputDialog(f.enterStartPlan());
+                    action = Integer.parseInt(starter);
+//                    System.out.println("Please try again.");
+//                    scanner.nextLine();
                 }
             }
 
@@ -167,14 +177,17 @@ public class FinancePlanner extends JFrame {
 
     private void spendBalanceFromPlan(FinancePlan f) throws NegativeNumberException {
         float spending;
-        System.out.println("Enter amount of spending");
+
         while (true) {
             try {
-                spending = scanner.nextFloat();
+                String spendMessage = JOptionPane.showInputDialog("Enter amount of spending");
+                spending = Float.parseFloat(spendMessage);
                 break;
             } catch (java.util.InputMismatchException e) {
-                System.out.println("Please try again.");
-                scanner.nextLine();
+                String spendMessage = JOptionPane.showInputDialog("Enter amount of spending");
+                spending = Float.parseFloat(spendMessage);
+//                System.out.println("Please try again.");
+//                scanner.nextLine();
             }
         }
 
@@ -182,30 +195,38 @@ public class FinancePlanner extends JFrame {
             throw new NegativeNumberException("Game Over.");
         } else {
             f.subSpending(spending);
-            System.out.println("Balance is now: " + f.retBalance());
+            JOptionPane.showMessageDialog(spendField, "Balance is now"+f.retBalance());
+//            System.out.println("Balance is now: " + f.retBalance());
         }
     }
 
     private void addBalanceToPlan(FinancePlan f) throws NegativeNumberException {
         float amount;
-        System.out.println("Enter amount of money to your balance");
+//        System.out.println("Enter amount of money to your balance");
         while (true) {
             try {
-                amount = scanner.nextFloat();
+                String addMessage = JOptionPane.showInputDialog("Enter amount to balance:");
+                amount = Float.parseFloat(addMessage);
+                //amount = scanner.nextFloat();
                 break;
             } catch (java.util.InputMismatchException e) {
-                System.out.println("Please try again.");
-                scanner.nextLine();
+                String addMessage = JOptionPane.showInputDialog("Enter amount to balance:");
+                amount = Float.parseFloat(addMessage);
+//                System.out.println("Please try again.");
+//                scanner.nextLine();
             }
         }
         if (amount >= 100) {
             f.addBalance(amount);
-            f.compliment();
+            JLabel compliment = new JLabel("nice.");
+            add(compliment);
+//            f.compliment();
         } else if (amount < 0) {
             throw new NegativeNumberException("Game Over.");
         } else {
             f.addBalance(amount);
-            System.out.println("Balance is now: " + f.retBalance());
+            JOptionPane.showMessageDialog(addField, "Balance is now: $"+f.retBalance());
+//            System.out.println("Balance is now: " + f.retBalance());
         }
     }
 
@@ -230,10 +251,13 @@ public class FinancePlanner extends JFrame {
                 sb.append(line);
                 sb.append(System.lineSeparator());
             }
-            System.out.println(sb.toString());
+
+//            System.out.println(sb.toString());
             JSONObject timestamp = new JSONObject(sb.toString());
             int tS = timestamp.getInt("timestamp");
-            System.out.println("Timestampe is: " + tS);
+            JLabel timeStampNow = new JLabel("Timestampe is: " + tS);
+            JOptionPane.showMessageDialog(boeField, "Timestampe is: " + tS);
+            add(timeStampNow);
 
         } finally {
 
@@ -244,7 +268,7 @@ public class FinancePlanner extends JFrame {
     }
 
     public static void main(String[] args) throws IOException, NegativeNumberException {
-        FinancePlanner fplay = new FinancePlanner();
+        new FinancePlanner();
     }
 
 }
