@@ -20,20 +20,20 @@ import java.net.URL;
 
 import javax.swing.*;
 import java.awt.FlowLayout;
-import java.awt.event.*;
+//import java.awt.event.*;
 
 import org.json.JSONObject;
 
 
 public class FinancePlanner extends JFrame {
-    Scanner scanner = new Scanner(System.in);
+//    Scanner scanner = new Scanner(System.in);
     private JTextField nameField;
     private JTextField boeField;
     private JTextField addField;
     private JTextField spendField;
 
     public FinancePlanner() throws IOException, NegativeNumberException {
-        super("The Finance Planner 5000");
+//        super("The Finance Planner 5000");
         setSize(350,350);
         setVisible(true);
         setLayout(new FlowLayout());
@@ -63,13 +63,15 @@ public class FinancePlanner extends JFrame {
             while (true) {
                 try {
 //                    System.out.println("Choose a type (0)Beginner (1)Expert");
-                    String choiceF = JOptionPane.showInputDialog("Choose a type (0)Beginner (1) Expert");
+                    String choiceF = JOptionPane.showInputDialog("Choose a type (0)Beginner\n+" +
+                            "(1) Expert");
                     financeType = Integer.parseInt(choiceF);
 //                            scanner.nextInt();
                     break;
                 } catch (java.util.InputMismatchException e) {
                     System.out.println("Please try again.");
-                    String choiceF = JOptionPane.showInputDialog("Choose a type (0)Beginner (1) Expert");
+                    String choiceF = JOptionPane.showInputDialog("Choose a type (0)Beginner\n" +
+                            " (1) Expert");
                     financeType = Integer.parseInt(choiceF);
 //                    scanner.nextLine();
                 }
@@ -219,7 +221,8 @@ public class FinancePlanner extends JFrame {
         if (amount >= 100) {
             f.addBalance(amount);
             JLabel compliment = new JLabel("nice.");
-            add(compliment);
+            JOptionPane.showMessageDialog(addField, "Balance is now: $"+f.retBalance());
+            compliment.add(nameField);
 //            f.compliment();
         } else if (amount < 0) {
             throw new NegativeNumberException("Game Over.");
