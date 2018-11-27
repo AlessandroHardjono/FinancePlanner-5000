@@ -6,7 +6,7 @@ import Budget_stuff.ExpertFinance;
 import Budget_stuff.FinancePlan;
 import exceptions.NegativeNumberException;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 import java.io.IOException;
 import java.util.List;
 import java.io.PrintWriter;
@@ -70,8 +70,10 @@ public class FinancePlanner extends JFrame {
                     break;
                 } catch (java.util.InputMismatchException e) {
                     System.out.println("Please try again.");
-                    String choiceF = JOptionPane.showInputDialog("Choose a type (0)Beginner\n" +
-                            " (1) Expert");
+                    String choiceF = JOptionPane.showInputDialog(
+                            "Choose a type\n" +
+                            "(0)Beginner\n" +
+                            "(1) Expert");
                     financeType = Integer.parseInt(choiceF);
 //                    scanner.nextLine();
                 }
@@ -90,7 +92,11 @@ public class FinancePlanner extends JFrame {
 //            System.out.println(currentUser.displayID());
 
 //            System.out.println("try again? (0)Yes (1)No (2) Remove name");
-            String tryInput = JOptionPane.showInputDialog("try again? (0)Yes (1)No (2) Remove name");
+            String tryInput = JOptionPane.showInputDialog(
+                    "try again?\n" +
+                    "(0)Yes\n" +
+                    "(1)No\n" +
+                    "(2) Remove name");
             int tryAgain = Integer.parseInt(tryInput);
 
             if (tryAgain == 1) { break; }
