@@ -26,14 +26,12 @@ import org.json.JSONObject;
 
 
 public class FinancePlanner extends JFrame {
-//    Scanner scanner = new Scanner(System.in);
-    private JTextField nameField;
-    private JTextField boeField;
-    private JTextField addField;
-    private JTextField spendField;
+    private JPanel nameField;
+    private JPanel boeField;
+    private JPanel addField;
+    private JPanel spendField;
 
     public FinancePlanner() throws IOException, NegativeNumberException {
-//        super("The Finance Planner 5000");
         setSize(350,350);
         setVisible(true);
         setLayout(new FlowLayout());
@@ -50,8 +48,7 @@ public class FinancePlanner extends JFrame {
         while (true) {
 
             currentUser.stateName();
-            nameField = new JTextField(10);
-            add(nameField);
+            nameField = new JPanel();
             String name = JOptionPane.showInputDialog("State your name: ");
             currentUser.establishUser(name);
             currentUser.addUser(name);
@@ -62,11 +59,10 @@ public class FinancePlanner extends JFrame {
 
             while (true) {
                 try {
-//                    System.out.println("Choose a type (0)Beginner (1)Expert");
-                    String choiceF = JOptionPane.showInputDialog("Choose a type (0)Beginner\n+" +
+                    String choiceF = JOptionPane.showInputDialog("Choose a type\n" +
+                            "(0)Beginner\n+" +
                             "(1) Expert");
                     financeType = Integer.parseInt(choiceF);
-//                            scanner.nextInt();
                     break;
                 } catch (java.util.InputMismatchException e) {
                     System.out.println("Please try again.");
@@ -75,7 +71,6 @@ public class FinancePlanner extends JFrame {
                             "(0)Beginner\n" +
                             "(1) Expert");
                     financeType = Integer.parseInt(choiceF);
-//                    scanner.nextLine();
                 }
             }
 
@@ -88,10 +83,7 @@ public class FinancePlanner extends JFrame {
             JLabel accounts = new JLabel("Accounts so far: "+ currentUser.displayID());
             accounts.setToolTipText("This is the amount of accounts active right now.");
             add(accounts);
-//            System.out.println("Accounts so far:");
-//            System.out.println(currentUser.displayID());
 
-//            System.out.println("try again? (0)Yes (1)No (2) Remove name");
             String tryInput = JOptionPane.showInputDialog(
                     "try again?\n" +
                     "(0)Yes\n" +
@@ -103,9 +95,6 @@ public class FinancePlanner extends JFrame {
             else if (tryAgain == 0) {
                 name = JOptionPane.showInputDialog("State your name: ");
                 currentUser.establishUser(name);
-//                currentUser.stateName();
-//                name = scanner.nextLine();
-                currentUser.establishUser(name);
                 currentUser.addUser(name);
             }
             else if (tryAgain == 2) {
@@ -115,7 +104,7 @@ public class FinancePlanner extends JFrame {
         }
 
         JLabel byeBye = new JLabel("goodbye!");
-        add(byeBye);
+        nameField.add(byeBye);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         return;
@@ -164,8 +153,6 @@ public class FinancePlanner extends JFrame {
                 } catch (java.util.InputMismatchException e) {
                     String starter = JOptionPane.showInputDialog(f.enterStartPlan());
                     action = Integer.parseInt(starter);
-//                    System.out.println("Please try again.");
-//                    scanner.nextLine();
                 }
             }
 
@@ -203,14 +190,12 @@ public class FinancePlanner extends JFrame {
             throw new NegativeNumberException("Game Over.");
         } else {
             f.subSpending(spending);
-            JOptionPane.showMessageDialog(spendField, "Balance is now"+f.retBalance());
-//            System.out.println("Balance is now: " + f.retBalance());
+            JOptionPane.showMessageDialog(spendField, "Balance is now: $"+f.retBalance());
         }
     }
 
     private void addBalanceToPlan(FinancePlan f) throws NegativeNumberException {
         float amount;
-//        System.out.println("Enter amount of money to your balance");
         while (true) {
             try {
                 String addMessage = JOptionPane.showInputDialog("Enter amount to balance:");
@@ -220,8 +205,6 @@ public class FinancePlanner extends JFrame {
             } catch (java.util.InputMismatchException e) {
                 String addMessage = JOptionPane.showInputDialog("Enter amount to balance:");
                 amount = Float.parseFloat(addMessage);
-//                System.out.println("Please try again.");
-//                scanner.nextLine();
             }
         }
         if (amount >= 100) {
@@ -229,13 +212,11 @@ public class FinancePlanner extends JFrame {
             JLabel compliment = new JLabel("nice.");
             JOptionPane.showMessageDialog(addField, "Balance is now: $"+f.retBalance());
             compliment.add(nameField);
-//            f.compliment();
         } else if (amount < 0) {
             throw new NegativeNumberException("Game Over.");
         } else {
             f.addBalance(amount);
             JOptionPane.showMessageDialog(addField, "Balance is now: $"+f.retBalance());
-//            System.out.println("Balance is now: " + f.retBalance());
         }
     }
 
@@ -261,7 +242,6 @@ public class FinancePlanner extends JFrame {
                 sb.append(System.lineSeparator());
             }
 
-//            System.out.println(sb.toString());
             JSONObject timestamp = new JSONObject(sb.toString());
             int tS = timestamp.getInt("timestamp");
             JLabel timeStampNow = new JLabel("Timestampe is: " + tS);
