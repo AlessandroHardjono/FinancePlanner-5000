@@ -19,8 +19,6 @@ import java.net.URL;
 
 import javax.swing.*;
 import java.awt.FlowLayout;
-//import java.awt.event.*;
-
 import org.json.JSONObject;
 
 
@@ -45,6 +43,7 @@ public class FinancePlanner extends JFrame {
 
         AccountControl currentUser = new AccountControl("", 0);
         int financeType;
+        String name;
 
         List<String> lines = Files.readAllLines(Paths.get("outputFile.txt"));
         PrintWriter writer = new PrintWriter("outputFile.txt", "UTF-8");
@@ -59,7 +58,16 @@ public class FinancePlanner extends JFrame {
 
             currentUser.stateName();
             nameField = new JPanel();
-            String name = JOptionPane.showInputDialog("State your name: ");
+            while (true) {
+                try {
+                    String nameChosen = JOptionPane.showInputDialog("State your name: ");
+                    name = nameChosen;
+                    break;
+                } catch (java.lang.NullPointerException e) {
+                    JOptionPane.showMessageDialog(nameField, "Enter a name, please.");
+                }
+            }
+
             currentUser.establishUser(name);
             currentUser.addUser(name);
 
@@ -80,13 +88,9 @@ public class FinancePlanner extends JFrame {
                 } catch (java.lang.NullPointerException e) {
                     JOptionPane.showMessageDialog(boeField, "Enter either (0) for Beginner or" +
                             "(1) for Expert.");
-                    continue;
-//                    System.out.println("Please try again.");
-//                    String choiceF = JOptionPane.showInputDialog(
-//                            "Choose a type\n" +
-//                            "(0)Beginner\n" +
-//                            "(1) Expert");
-//                    financeType = Integer.parseInt(choiceF);
+                } catch (java.lang.NumberFormatException e) {
+                    JOptionPane.showMessageDialog(boeField, "Enter either (0) for Beginner or" +
+                            "(1) for Expert.");
                 }
             }
 
@@ -105,7 +109,7 @@ public class FinancePlanner extends JFrame {
                     "try again?\n" +
                     "(0)Yes\n" +
                     "(1)No\n" +
-                    "(2) Remove name");
+                    "(2)Remove name");
             int tryAgain = Integer.parseInt(tryInput);
 
             if (tryAgain == 1) { break; }
@@ -173,8 +177,6 @@ public class FinancePlanner extends JFrame {
                     JOptionPane.showMessageDialog(boeField, "Enter a the following options please.");
                     continue;
                 } catch (java.lang.NumberFormatException e) {
-//                    String starter = JOptionPane.showInputDialog(f.enterStartPlan());
-//                    action = Integer.parseInt(starter);
                     JOptionPane.showMessageDialog(boeField, "Enter a the following options please.");
                     continue;
                 }
