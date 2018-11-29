@@ -214,7 +214,8 @@ public class FinancePlanner extends JFrame {
         }
 
         if (spending > f.retBalance()) {
-            throw new NegativeNumberException("Game Over.");
+            JOptionPane.showMessageDialog(spendField, "Program does not support negative balances.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             f.subSpending(spending);
             JOptionPane.showMessageDialog(spendField, "Balance is now: €"+f.retBalance());
@@ -243,7 +244,8 @@ public class FinancePlanner extends JFrame {
             JOptionPane.showMessageDialog(addField, "Balance is now: €"+f.retBalance());
             compliment.add(nameField);
         } else if (amount < 0) {
-            throw new NegativeNumberException("Game Over.");
+            JOptionPane.showMessageDialog(spendField, "Program does not support negative balances.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             f.addBalance(amount);
             JOptionPane.showMessageDialog(addField, "Balance is now: €"+f.retBalance());
