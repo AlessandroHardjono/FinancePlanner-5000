@@ -6,7 +6,7 @@ This project is used for CPSC 210 (Introduction to Software Engineering) in the 
 
 ## Functions
 
-This project is a simple calculator that keeps track of your money. Not much emphasis is put into its purpose, as this project is mostly used a playground to further understand the semantics of the Java language.
+This project is a simple calculator that keeps track of your money. Not much emphasis is put into its purpose, as this project is mostly used as a playground to further understand the semantics of Java.
 
 Features include:
 - adding money to the balance,
