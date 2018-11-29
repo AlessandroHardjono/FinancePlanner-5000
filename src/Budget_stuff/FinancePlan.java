@@ -39,7 +39,7 @@ public abstract class FinancePlan implements MathyMath, FinanceObserver {
 
     @Override
     public void update(AccountControl accountControl) {
-        System.out.println("User at the moment: " + accountControl.displayID());
+        System.out.println("User at the moment: " + accountControl. displayID());
     }
 
 
