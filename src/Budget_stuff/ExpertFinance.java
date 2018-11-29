@@ -12,7 +12,7 @@ public class ExpertFinance extends FinancePlan {
                 "1. Add an amount to your balance\n" +
                 "2. Enter Spending\n" +
                 "3. End the program\n" +
-                "4. Display Timestamp from a Finance Source.";
+                "4. Display base currency and today's date";
 
         return output;
     }

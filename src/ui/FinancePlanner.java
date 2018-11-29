@@ -274,9 +274,16 @@ public class FinancePlanner extends JFrame {
 
             System.out.println(sb);
             JSONObject baseCurrency = new JSONObject(sb.toString());
+            JSONObject todayDate = new JSONObject(sb.toString());
+
             String baseCurrencyString = baseCurrency.getString("base");
+            String todayDateString = todayDate.getString("date");
+
             JLabel timeStampNow = new JLabel("Base currency is: " + baseCurrencyString);
-            JOptionPane.showMessageDialog(boeField, "Base currency is: " + baseCurrencyString);
+
+            JOptionPane.showMessageDialog(boeField, "Base currency is: " + baseCurrencyString +
+                    "\nToday's date: " + todayDateString);
+
             add(timeStampNow);
 
         } finally {
