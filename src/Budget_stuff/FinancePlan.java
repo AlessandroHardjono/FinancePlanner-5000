@@ -33,7 +33,6 @@ public abstract class FinancePlan implements MathyMath, FinanceObserver {
     public void addName(AccountControl ac) {
         if(!names.contains(ac)) {
             names.add(ac);
-            //ac.notifyObserver(ac);
         }
     }
 

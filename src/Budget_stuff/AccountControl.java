@@ -1,10 +1,5 @@
 package Budget_stuff;
 
-//import exceptions.NegativeNumberException;
-//import ui.FinancePlanner;
-
-//import java.io.IOException;
-//import observer.FinanceObserver;
 import observer.Subject;
 
 import java.util.*;
@@ -12,7 +7,6 @@ import java.util.*;
 public class AccountControl extends Subject {
     private String name;
     private ArrayList<String> names;
-    private int type;
     private ArrayList<Integer> types;
     Map<AccountControl, String> identifyType;
 
@@ -20,7 +14,6 @@ public class AccountControl extends Subject {
         identifyType = new HashMap<>();
         names = new ArrayList<>();
         this.name = name;
-        this.type = type;
         types = new ArrayList<>();
     }
 

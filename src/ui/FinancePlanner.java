@@ -217,7 +217,7 @@ public class FinancePlanner extends JFrame {
             throw new NegativeNumberException("Game Over.");
         } else {
             f.subSpending(spending);
-            JOptionPane.showMessageDialog(spendField, "Balance is now: $"+f.retBalance());
+            JOptionPane.showMessageDialog(spendField, "Balance is now: €"+f.retBalance());
         }
     }
 
@@ -240,13 +240,13 @@ public class FinancePlanner extends JFrame {
         if (amount >= 100) {
             f.addBalance(amount);
             JLabel compliment = new JLabel("nice.");
-            JOptionPane.showMessageDialog(addField, "Balance is now: $"+f.retBalance());
+            JOptionPane.showMessageDialog(addField, "Balance is now: €"+f.retBalance());
             compliment.add(nameField);
         } else if (amount < 0) {
             throw new NegativeNumberException("Game Over.");
         } else {
             f.addBalance(amount);
-            JOptionPane.showMessageDialog(addField, "Balance is now: $"+f.retBalance());
+            JOptionPane.showMessageDialog(addField, "Balance is now: €"+f.retBalance());
         }
     }
 
