@@ -11,9 +11,9 @@ This project is a simple calculator that keeps track of your money. Not much emp
 Features include:
 - adding money to the balance,
 - subtracting the balance through spending,
-- and taking advantage of API to display today's date.
+- and taking advantage of API to display the currency exchange.
 
-This program uses a simple graphical user interface using JSon and swing, where it shows simple message and input window (depending on the feature).
+This program uses a simple graphical user interface using JSON and swing, where it shows simple message and input window (depending on the feature).
 
 Drink coffee. :coffee:
 
